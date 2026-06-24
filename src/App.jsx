@@ -4,11 +4,12 @@ import data from './db/data';
 import { Outlet, Route, Routes, useNavigate } from 'react-router-dom';
 import Home from './components/Home';
 import Detail from './components/Detail';
+import About from './components/About';
 
 function App() {
     const navigate = useNavigate();
     const [fruits, setFruits] = useState(data);
-    console.log(fruits)
+    // console.log(fruits)
 
     return (
         <div className="App">
@@ -36,15 +37,18 @@ function App() {
             </nav>
 
             <Routes>
-                <Route path="/" element={<Home fruits={fruits} />}></Route>
+                <Route path="/" element={<Home fruits={fruits} setFruits={setFruits} />}></Route>
                 <Route path="/detail/:pid" element={<Detail fruits={fruits} />} />
-                <Route path='/about' element={<div>About<br /> <Outlet></Outlet></div>}>
+                <Route path='/about' element={<About />}>
                     <Route path='member' element={<div>member</div>} />
                     <Route path='location' element={<div>location</div>} />
                 </Route>
                 <Route path='*' element={<div>페이지를 찾을 수 없습니다.</div>} />
             </Routes>
 
+            <footer className="bg-[#333] text-white py-5 mt-[80px] mb-0 text-center text-xs tracking-wider">
+                <p>COPYRIGHT(C) 2026 Nike, Inc. All Rights Reserved</p>
+            </footer>
 
         </div>
 
