@@ -14,7 +14,7 @@ const Cart = () => {
     const { name, age } = user
 
     // zustand에서 변경함수 가져오기
-    const {changeName, increase} = useCartStore()
+    const {changeName, increase} = useUserStore()
     const {addCount, decreaseCount, deleteItem, sortName} = useCartStore()
 
     return (
