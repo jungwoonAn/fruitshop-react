@@ -1,6 +1,25 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import TabContent from './TabContent'
+import styled from 'styled-components'
+// import { useDispatch } from 'react-redux'
+// import { addItem } from '../store'
+import { useCartStore } from '../store/cartStore'
+
+const Box = styled.div`
+    padding: 20px 0;
+    color: gray;
+`
+const YellowBtn = styled.button`
+    color : white;
+    font-size: 30px;
+    width: 100%;
+    padding : 100px;
+    border: 1px solid #ccc;
+    background-image:url("https://images.unsplash.com/photo-1536657464919-892534f60d6e?q=80&w=874&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+    background-size: cover;
+    background-position: center;
+`
 
 const Detail = (props) => {
     const { pid } = useParams()
@@ -10,6 +29,11 @@ const Detail = (props) => {
     let selproduct = fruits.find(x => x.id == parseInt(pid) + 1)
     const [alert, setAlert] = useState(true)
     const [fade, setFade] = useState('')
+    // const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    // zustand에서 addItem 함수 가져오기
+    const addItem = useCartStore(state => state.addItem)
 
     useEffect(()=>{
         const timer = setTimeout(()=>{setAlert(false)}, 2000)
@@ -31,6 +55,10 @@ const Detail = (props) => {
                 </div>
             }
 
+            <Box>
+                <YellowBtn>지금 구매하면 10% 할인</YellowBtn>
+            </Box>
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                 <div className="w-full">
                     <img src={import.meta.env.BASE_URL + selproduct.imgUrl} alt="상품 이미지" className="w-full h-auto" />
@@ -39,8 +67,13 @@ const Detail = (props) => {
                 <div className="pt-5 md:pt-0 space-y-4">
                     <h4 className="text-2xl font-bold text-gray-900">{selproduct.title}</h4>
                     <p className="text-gray-600 leading-relaxed">{selproduct.content}</p>
-                    <p className="text-xl font-semibold text-gray-900">{selproduct.price}원</p>
-                    <button className="bg-red-600 hover:bg-red-700 text-white font-medium px-6 py-2.5 rounded-lg transition-colors shadow-md active:scale-95 transform">
+                    <p className="text-xl font-semibold text-gray-900">{selproduct.price.toLocaleString()}원</p>
+                    <button className="bg-red-600 hover:bg-red-700 text-white font-medium px-6 py-2.5 rounded-lg transition-colors shadow-md active:scale-95 transform" onClick={()=>{
+                        addItem({id: selproduct.id, item: selproduct.title, price: selproduct.price, imgUrl: selproduct.imgUrl, amount: 1})
+                        if(window.confirm('장바구니로 이동하시겠습니까?')){
+                            navigate('/cart')
+                        }
+                    }}>
                         주문하기
                     </button>
                 </div>

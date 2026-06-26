@@ -1,15 +1,21 @@
-import { useState } from 'react';
+import { createContext, useState } from 'react';
 import './App.css'
 import data from './db/data';
 import { Outlet, Route, Routes, useNavigate } from 'react-router-dom';
 import Home from './components/Home';
 import Detail from './components/Detail';
 import About from './components/About';
+// import { useSelector } from 'react-redux';
+import Cart from './components/Cart';
+
+export const Context1 = createContext()
 
 function App() {
     const navigate = useNavigate();
     const [fruits, setFruits] = useState(data);
     // console.log(fruits)
+    const [remain, setRemain] = useState([10,11,12])
+    // const user = useSelector(state => state.user)
 
     return (
         <div className="App">
@@ -38,11 +44,16 @@ function App() {
 
             <Routes>
                 <Route path="/" element={<Home fruits={fruits} setFruits={setFruits} />}></Route>
-                <Route path="/detail/:pid" element={<Detail fruits={fruits} />} />
+                <Route path="/detail/:pid" element={
+                    <Context1.Provider value={{remain, fruits}}>
+                        <Detail fruits={fruits} />
+                    </Context1.Provider>
+                } />
                 <Route path='/about' element={<About />}>
                     <Route path='member' element={<div>member</div>} />
                     <Route path='location' element={<div>location</div>} />
                 </Route>
+                <Route path='/cart' element={<Cart />} />
                 <Route path='*' element={<div>페이지를 찾을 수 없습니다.</div>} />
             </Routes>
 
