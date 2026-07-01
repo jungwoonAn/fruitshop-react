@@ -27,7 +27,7 @@ const Home = (props) => {
 
     const moreVeggies = () => {
         if (count === 1) {
-            axios.get('https://jungwoonan.github.io/react_data/veggie_2.json')
+            axios.get('https://jungwoonan.github.io/react_data/veggie2.json')
                 .then((result) => {
                     console.log(result)
                     let copy = [...veggies, ...result.data]
@@ -38,7 +38,7 @@ const Home = (props) => {
                     console.log(error)
                 })
         } else if (count === 2) {
-            axios.get('https://jungwoonan.github.io/react_data/veggie_3.json')
+            axios.get('https://jungwoonan.github.io/react_data/veggie3.json')
                 .then((result) => {
                     console.log(result)
                     let copy = [...veggies, ...result.data]
