@@ -8,5 +8,5 @@ export default defineConfig({
     react(),
     tailwindcss()
   ],
-  base: process.env.VERCEL ? '/' : '/fruitshop-react/'
+  base: process.env.VERCEL ? '/' : '/fruitshop-react'
 })
