@@ -60,7 +60,7 @@ function App() {
                 <Route path='*' element={<div>페이지를 찾을 수 없습니다.</div>} />
             </Routes>
 
-            <footer className="bg-[#333] text-white py-5 mt-[80px] mb-0 text-center text-xs tracking-wider">
+            <footer className="bg-[#333] text-white py-5 mt-20 mb-0 text-center text-xs tracking-wider">
                 <p>COPYRIGHT(C) 2026 Nike, Inc. All Rights Reserved</p>
             </footer>
 
