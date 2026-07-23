@@ -7,6 +7,7 @@ import Detail from './components/Detail';
 import About from './components/About';
 // import { useSelector } from 'react-redux';
 import Cart from './components/Cart';
+import RouteTracker from './RouteTracker';
 
 export const Context1 = createContext()
 
@@ -19,6 +20,8 @@ function App() {
 
     return (
         <div className="App">
+            <RouteTracker />
+
             <nav className="bg-gray-900 text-white px-4 py-3 shadow-md">
                 <div className="max-w-7xl mx-auto flex items-center justify-between">
                     <a onClick={() => { navigate('/') }} className="text-xl font-bold tracking-wide hover:text-gray-300 transition-colors">
